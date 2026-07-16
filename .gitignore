@@ -1,0 +1,15 @@
+.env
+.env.local
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+
+node_modules/
+.next/
+out/
+
+postgres_data/
+.DS_Store
+Thumbs.db
+
