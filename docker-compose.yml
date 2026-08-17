@@ -22,24 +22,34 @@ services:
       context: ./apps/api
     environment:
       DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://careflow:careflow@db:5432/careflow}
-      API_CORS_ORIGINS: ${API_CORS_ORIGINS:-http://localhost:3000}
+      API_CORS_ORIGINS: ${API_CORS_ORIGINS:-http://localhost:3001}
       DATA_MODE: synthetic
-    depends_on:
-      db:
-        condition: service_healthy
+      DATA_DIR: /data
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-nvidia/nemotron-3-ultra-550b-a55b:free}
+      OPENROUTER_SITE_URL: ${OPENROUTER_SITE_URL:-http://localhost:3001}
+      OPENROUTER_APP_TITLE: ${OPENROUTER_APP_TITLE:-CareFlow Intelligence}
+      AGENT_MAX_ITERATIONS: ${AGENT_MAX_ITERATIONS:-4}
+      AGENT_MAX_TOOL_CALLS: ${AGENT_MAX_TOOL_CALLS:-3}
+    # If using local db instead of Supabase, uncomment depends_on:
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
     ports:
       - "8000:8000"
+    volumes:
+      - ./data:/data
 
   web:
     build:
       context: ./apps/web
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      INTERNAL_API_URL: ${INTERNAL_API_URL:-http://api:8000}
     depends_on:
       - api
     ports:
-      - "3000:3000"
+      - "3001:3000"
 
 volumes:
   postgres_data:
-
