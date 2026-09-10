@@ -1,9 +1,12 @@
 # CareFlow Intelligence
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![Next.js](https://img.shields.io/badge/Next.js-15.1+-black.svg?logo=next.js&logoColor=white)](https://nextjs.org)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2+-black.svg?logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19.2+-20232A.svg?logo=react&logoColor=61DAFB)](https://react.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3+-38B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17.6-336791.svg?logo=postgresql&logoColor=white)](https://www.postgresql.org)
 [![Supabase](https://img.shields.io/badge/Supabase-Cloud%20DB-3ECF8E.svg?logo=supabase&logoColor=white)](https://supabase.com)
+[![Tests](https://img.shields.io/badge/Tests-21%2F21%20Passing-brightgreen.svg)](./apps/api/tests)
 [![Unsloth](https://img.shields.io/badge/Unsloth-4--bit%20QLoRA-FF6F00.svg)](https://github.com/unslothai/unsloth)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
@@ -84,7 +87,7 @@ Dive deep into every component of CareFlow Intelligence:
 | [**Synthetic Data Pipeline**](./docs/DATA_PIPELINE.md) | Synthea generation engine, CSV/FHIR schemas, validation guards, and human-in-the-loop imports. |
 | [**Knowledge Ingestion Suite**](./docs/KNOWLEDGE_INGESTION.md) | Ingestion pipelines for OpenFDA monographs, PubMed trials, ADA/AHA/KDIGO guidelines, and media transcripts. |
 | [**RAFT & ML Fine-Tuning**](./docs/RAFT_PIPELINE.md) | Dataset synthesis with distractors/abstentions, Unsloth 4-bit QLoRA, benchmarks, and Ollama deployment. |
-| [**Frontend & Clinical UI Guide**](./docs/FRONTEND_GUIDE.md) | Next.js 15 App Router structure, Patient Explorer, Unified Timeline, and Agent Trace Inspector. |
+| [**Frontend & Clinical UI Guide**](./docs/FRONTEND_GUIDE.md) | Next.js 16 App Router structure (Turbopack, React 19, Tailwind CSS 4), Patient Explorer, Unified Timeline, and Agent Trace Inspector. |
 | [**Deployment & Operations Runbook**](./docs/DEPLOYMENT_AND_OPERATIONS.md) | Docker orchestration, Supabase Cloud configuration, live log streaming, and troubleshooting runbooks. |
 | [**Command Reference Sheet**](./COMMANDS.md) | Ready-to-use copy-paste PowerShell commands for all system workflows. |
 | [**Development Iteration Log**](./WALKTHROUGH.md) | Complete iteration history, architectural decisions, and benchmark verification results. |
@@ -115,6 +118,18 @@ python .\scripts\raft\train_unsloth_qwen.py --model "unsloth/Qwen2.5-7B-Instruct
 ```powershell
 # Stream API logs in real-time
 docker logs -f careflowintelligence-api-1
+```
+
+---
+
+### Run Verification & Test Suite
+```powershell
+# 1. Run backend API test suite (21 passing tests)
+.\.venv\Scripts\python.exe -m pytest apps/api/tests --basetemp=.pytest_tmp -q
+
+# 2. Run frontend web typecheck (Next.js 16 + React 19)
+cd apps/web
+npm run typecheck
 ```
 
 ---

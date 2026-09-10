@@ -38,3 +38,7 @@ unsloth_compiled_cache/
 # OS Specific
 .DS_Store
 Thumbs.db
+\
+
+.playwright-mcp/
+.pytest_tmp/
